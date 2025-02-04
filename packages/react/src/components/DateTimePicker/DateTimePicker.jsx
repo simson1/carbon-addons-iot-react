@@ -296,8 +296,6 @@ const defaultProps = {
   style: {},
 };
 
-const dateTimePickerId = uuidv4();
-
 const DateTimePicker = ({
   testId,
   defaultValue,
@@ -317,10 +315,10 @@ const DateTimePicker = ({
   i18n,
   light,
   locale,
-  id = dateTimePickerId,
   style,
   ...others
 }) => {
+  const id = useRef(others.id || uuidv4()).current;
   const mergedI18n = {
     ...defaultProps.i18n,
     ...i18n,

@@ -202,8 +202,6 @@ export const propTypes = {
   style: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
 };
 
-const dateTimePickerId = uuidv4();
-
 export const defaultProps = {
   testId: 'date-time-picker',
   defaultValue: null,
@@ -323,7 +321,6 @@ const DateTimePicker = ({
   i18n,
   light,
   locale,
-  id = dateTimePickerId,
   hasIconOnly,
   menuOffset,
   datePickerType,
@@ -332,6 +329,8 @@ const DateTimePicker = ({
   style,
   ...others
 }) => {
+  const id = useRef(others.id || uuidv4()).current;
+
   React.useEffect(() => {
     if (__DEV__) {
       warning(
